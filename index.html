@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayam Goreng Samyang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: lightcoral;
+            color: #333;
+        }
+      
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: darkred;
+            padding: 10px 20px;
+            border-bottom: 2px solid #ff4b4b;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .logo img {
+            height: 130px;
+            margin-right: 10px;
+        }
+        
+        .navbar {
+            position: relative;
+        }
+        
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar ul li {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: block;
+        }
+        
+        .navbar ul li ul {
+            display: none;
+            position: absolute;
+            background-color: #ff4b4b;
+            top: 40px;
+            left: 0;
+            width: 200px;
+        }
+        
+        .navbar ul li ul li {
+            display: block;
+        }
+        
+        .navbar ul li:hover ul {
+            display: block;
+        }
+        
+        .slider {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .slide img {
+            max-width: 500px;
+            display: block;
+            max-height: 700px;
+        }
+        
+        section {
+            background-color: darkred;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        .section1 {
+            background-color: lightcoral;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin: 0px 0;
+            border-radius: 10px;
+            height: 750px;
+        }
+                .section2 {
+            color: white;
+            font-size: 26px;
+        }
+        
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+}
+        
+        .menu-item {
+            background-color: #222;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .menu-item img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        
+        .menu-item h3 {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .contact-form button {
+            background-color: #ff4b4b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .order-button img {
+    width: auto;
+    height: 140%;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+        .order-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Popup styles */
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .popup-content img {
+            width: 100px;
+            margin: 10px;
+            cursor: pointer;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+        
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+figure.snip1390 {
+  font-family: 'Roboto', Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  margin: 10px;
+  min-width: 230px;
+  max-width: 315px;
+  width: 100%;
+  color: #000000;
+  text-align: center;
+  font-size: 16px;
+  background-color: black;
+  border-radius: 10px;
+  border: 2px solid white;
+  padding: 30px;
+  background-image: linear-gradient(-25deg, rgba(0, 0, 0, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+figure.snip1390 *,
+figure.snip1390 *:before,
+figure.snip1390 *:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+figure.snip1390 figcaption {
+  width: 100%;
+}
+figure.snip1390 h2,
+figure.snip1390 h4,
+figure.snip1390 blockquote {
+  margin: 0;
+}
+figure.snip1390 h2,
+figure.snip1390 h4 {
+  font-weight: 300;
+}
+figure.snip1390 h2 {
+  color: black;
+}
+figure.snip1390 h4 {
+  color: white;
+}
+figure.snip1390 blockquote {
+  font-size: 1em;
+  padding: 45px 20px 40px 50px;
+  margin-top: 30px;
+  background-color: darkred;
+  border: 2px solid white;
+  border-radius: 10px;
+  box-shadow: inset -1.4px -1.4px 2px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  position: relative;
+  color: white;
+}
+figure.snip1390 blockquote:before {
+  font-family: 'FontAwesome';
+  content: "\201C";
+  position: absolute;
+  font-size: 70px;
+  opacity: 1;
+  font-style: normal;
+  top: 0px;
+  left: 20px;
+  
+}
+figure.snip1390 .profile {
+  width: 100px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.4);
+  margin-bottom: 10px;
+  border: solid 5px #A6A57A;
+}
+
+.testimonial-slider {
+  overflow: hidden;
+  max-width: 100%;
+  position: relative;
+}
+
+.testimonial-slider figure {
+  display: inline-block;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.testimonial-slider figure img {
+  width: 100px; /* Adjust as needed */
+  margin: 10px;
+  cursor: pointer;
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: lightblue;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.product-item1 {
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+
+.fade {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade.fade-out {
+  opacity: 0;
+}
+.container img {
+  max-height: 620px;
+  justify-content: center;
+  position: relative;
+}
+
+
+/* Tablet Landscape */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    /* CSS rules for tablet landscape */
+}
+
+/* Tablet Portrait */
+@media screen and (min-width: 481px) and (max-width: 767px) {
+    /* CSS rules for tablet portrait */
+}
+
+/* Mobile Landscape & Portrait */
+@media screen and (max-width: 480px) {
+    /* CSS rules for mobile */
+}
+
+
+.folded .contact-content {
+    display: none;
+}
+/* Additional styles for navigation or autoplay can be added here */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #ff4b4b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Style for the fold toggle */
+.fold-toggle {
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+    <!-- Your HTML content -->
+<header>
+    <div class="logo">
+        <img src="img/logo.webp" alt="Logo">
+    </div>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="#menu"><i class="fas fa-utensils"></i> Menu</a></li>
+            <li><a href="#contact"><i class="fas fa-phone"></i> Contact</a></li>
+            <li><a href="#testimoni"><i class="fas fa-comment"></i> Testimoni</a></li>
+        </ul>
+    </nav>
+</header>
+<section class="section1" id="home">
+    <div class="slider">
+        <div class="slides">
+            <div class="slide"><img src="img/promo1.webp" alt="Promo 1"></div>
+            <div class="slide"><img src="img/promo2.webp" alt="Promo 2"></div>
+            <div class="slide"><img src="img/promo3.webp" alt="Promo 3"></div>
+            <div class="slide"><img src="img/15.webp" alt="Promo 4"></div>
+            <div class="slide"><img src="img/promo5.webp" alt="Promo 5"></div>
+            <div class="slide"><img src="img/promo6.webp" alt="Promo 6"></div>
+
+        </div>
+    </div>
+    </section>
+
+<section id="about">
+    <h2><i class="fas fa-users"></i> &nbsp; Tentang Kami</h2>
+    <p class="product-item1"><i><b>" Ayam Goreng Samyang adalah restoran yang menyediakan ayam goreng dengan cita rasa pedas khas Korea. Kami menggunakan bumbu Samyang yang terkenal dengan tingkat kepedasan tinggi yang dapat memanjakan lidah Anda. "</p></i></b>
+</section>
+
+<section id="menu">
+    <h2><i class="fas fa-utensils"></i> &nbsp; Menu Kami</h2>
+    <div class="menu-grid">
+        <!-- Menu items -->
+            <div class="menu-item">
+                <img src="img/4.webp" alt="Menu 1">
+                <h3>Ayam Geprex + Nasi</h3>
+            </div>
+            <div class="menu-item">
+                <img src="img/5.webp" alt="Menu 2">
+                <h3>Ayam Goreng Ori</h3>
+            </div>
+            <div class="menu-item">
+                <img src="img/6.webp" alt="Menu 3">
+                <h3>Fire Chicken</h3>
+            </div>
+            <div class="menu-item">
+                <img src="img/16.webp" alt="Menu 4">
+                <h3>Fire chicken + Nasi</h3>
+            </div>
+            <div class="menu-item">
+                <img src="img/1.webp" alt="Menu 5">
+                <h3>Ayam Cola</h3>
+            </div>
+            <div class="menu-item">
+                <img src="img/2.webp" alt="Menu 6">
+                <h3>Ayam Gochujang</h3>
+            </div>
+            <div class="menu-item">
+                <img src="img/13.webp" alt="Menu 7">
+                <h3>4x Fire Chicken</h3>
+            </div>
+            <div class="menu-item">
+                <img src="img/12.webp" alt="Menu 8">
+                <h3>5x Fire Wings</h3>
+            </div>
+        </div>
+        </div>
+    </section>
+    
+      <div class="container">
+    <img id="mainImage" src="img/gal1.webp" class="fade">
+
+  </div>
+
+<section id="testimoni">
+  <h2 class="section2"><b><i class="fas fa-users"> &nbsp; Testimoni</i></b></h2>
+  <div class="testimonial-slider">
+
+  <figure class="snip1390">
+  <img src="img/dany.webp" alt="profile-sample3" class="profile" />
+  <figcaption>
+    <h4><b>Dany Indrawan P.</h4></b>
+    <blockquote>Saya sangat suka ayam pedas saos Samyang! Rasanya sangat lezat dan pedasnya pas. Tekstur ayamnya juga renyah sekali, mantull lahhh 
+    </blockquote>
+  </figcaption>
+</figure>
+<figure class="snip1390 hover"><img src="img/septian.webp" alt="profile-sample5" class="profile" />
+  <figcaption>
+    <h4><b>Septian Rendy S.</h4></b>
+    <blockquote>Ayam pedas saos Samyang adalah pilihan terbaik bagi pecinta makanan pedas! Saosnya memiliki rasa yang khas dan membuatku ketagihan. </blockquote>
+  </figcaption>
+</figure>
+<figure class="snip1390"><img src="img/iqbal.webp" alt="profile-sample6" class="profile" />
+  <figcaption>
+    <h4><b>Iqbal Setiawan</h4></b>
+    <blockquote>Inilah ayam pedas terbaik yang pernah saya coba! Samyang selalu berhasil memberikan rasa yang autentik dan pedas yang menggigit. Ayamnya juga dipanggang dengan sempurna.</blockquote>
+  </figcaption>
+</figure>
+  <figure class="snip1390">
+  <img src="img/dany.webp" alt="profile-sample3" class="profile" />
+  <figcaption>
+    <h4><b>Dany Indrawan P.</h4></b>
+    <blockquote>Saya sangat suka ayam pedas saos Samyang! Rasanya sangat lezat dan pedasnya pas. Tekstur ayamnya juga renyah sekali, mantull lahhh 
+    </blockquote>
+  </figcaption>
+</figure>
+<figure class="snip1390 hover"><img src="img/septian.webp" alt="profile-sample5" class="profile" />
+  <figcaption>
+    <h4><b>Septian Rendy S.</h4></b>
+    <blockquote>Ayam pedas saos Samyang adalah pilihan terbaik bagi pecinta makanan pedas! Saosnya memiliki rasa yang khas dan membuatku ketagihan. </blockquote>
+  </figcaption>
+</figure>
+<figure class="snip1390"><img src="img/iqbal.webp" alt="profile-sample6" class="profile" />
+  <figcaption>
+    <h4><b>Iqbal Setiawan</h4></b>
+    <blockquote>Inilah ayam pedas terbaik yang pernah saya coba! Samyang selalu berhasil memberikan rasa yang autentik dan pedas yang menggigit. Ayamnya juga dipanggang dengan sempurna.</blockquote>
+  </figcaption>
+</figure>
+  <figure class="snip1390">
+  <img src="img/dany.webp" alt="profile-sample3" class="profile" />
+  <figcaption>
+    <h4><b>Dany Indrawan P.</h4></b>
+    <blockquote>Saya sangat suka ayam pedas saos Samyang! Rasanya sangat lezat dan pedasnya pas. Tekstur ayamnya juga renyah sekali, mantull lahhh 
+    </blockquote>
+  </figcaption>
+</figure>
+<figure class="snip1390 hover"><img src="img/septian.webp" alt="profile-sample5" class="profile" />
+  <figcaption>
+    <h4><b>Septian Rendy S.</h4></b>
+    <blockquote>Ayam pedas saos Samyang adalah pilihan terbaik bagi pecinta makanan pedas! Saosnya memiliki rasa yang khas dan membuatku ketagihan. </blockquote>
+  </figcaption>
+</figure>
+<figure class="snip1390"><img src="img/iqbal.webp" alt="profile-sample6" class="profile" />
+  <figcaption>
+    <h4><b>Iqbal Setiawan</h4></b>
+    <blockquote>Inilah ayam pedas terbaik yang pernah saya coba! Samyang selalu berhasil memberikan rasa yang autentik dan pedas yang menggigit. Ayamnya juga dipanggang dengan sempurna.</blockquote>
+  </figcaption>
+</figure>
+</div>
+</div>
+
+</section>
+
+<section id="contact" class="folded">
+    <h2><i class="fas fa-phone"></i> <span class="fold-toggle" onclick="toggleContact()"> &nbsp; Hubungi Kami Disini</span></h2>
+    <div id="contact-content" class="contact-content">
+        <form class="contact-form" action="handle_form.php" method="post">
+            <!-- Form fields -->
+            <input type="text" name="name" placeholder="Nama" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="message" placeholder="Pesan" rows="5" required></textarea>
+            <button type="submit">Kirim</button>
+        </form>
+    </div>
+</section>
+    <button class="order-button"><img src="img/orderbut.webp" alt="tombolorder"></button>
+
+    <!-- Popup container -->
+    <div id="popup-container" class="popup-container" onclick="closePopup()">
+        <div class="popup-content" onclick="event.stopPropagation()">
+          <h2 class="product-item"> DAPAT DIPESAN MELALUI :</h2>
+            <a href="https://wa.me/6281216447149" target="_blank">
+                <img src="img/wa.webp" alt="WhatsApp">
+            </a>
+            <a href="https://www.instagram.com/fire_chickenmlg" target="_blank">
+                <img src="img/ig.webp" alt="Instagram">
+            </a>
+                        <a href="pembayaran.html" target="_blank">
+                <img src="img/order.webp" alt="ordernow">
+            </a>
+            <span class="close-popup" onclick="closePopup()">x</span>
+        </div>
+    </div>
+
+<!-- Embed Google Maps with pin location -->
+<section id="Lokasi" >
+<h3 class="section2"><i class="fas fa-map-marked-alt"></i> &nbsp;Lokasi Kami di MAPS :</h3>
+</section1>
+    <iframe
+        width="100%"
+        height="400"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDemzmkSGb0wnXBxqunZAuTWb1wFeDC02M&q=-8.006928443908691,112.62730407714844">
+    </iframe>
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+  const images = ["gal1.webp", "gal2.webp", "gal3.webp"]; // Add more images if needed
+  let currentIndex = 0;
+  const imgElement = document.getElementById('mainImage');
+
+  function fadeOutCurrentImage() {
+    imgElement.style.opacity = 0;
+    setTimeout(() => {
+      fadeInNextImage();
+    }, 1000); // Adjust the duration of fade-out transition here (milliseconds)
+  }
+
+  function fadeInNextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    const nextImage = images[currentIndex];
+    
+    const tempImage = new Image();
+    tempImage.onload = function() {
+      imgElement.src = nextImage;
+      imgElement.style.opacity = 1;
+    }
+    tempImage.src = nextImage;
+  }
+
+  setInterval(fadeOutCurrentImage, 3000); // Change the duration of each image display (milliseconds)
+});
+        // JavaScript for the order button pop-up
+        document.querySelector('.order-button').addEventListener('click', function() {
+            document.getElementById('popup-container').style.display = 'flex';
+        });
+
+        function closePopup() {
+            document.getElementById('popup-container').style.display = 'none';
+        }
+      
+    // JavaScript for the slider
+    const slides = document.querySelectorAll('.slide');
+    const slider = document.querySelector('.slides');
+
+    let index = 0;
+    const slideWidth = slides[0].clientWidth;
+
+    function slideNext() {
+        index++;
+        if (index >= slides.length) {
+            index = 0;
+        }
+        slider.style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    function slidePrevious() {
+        index--;
+        if (index < 0) {
+            index = slides.length - 1;
+        }
+        slider.style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    // Call the slideNext function every 3 seconds
+    setInterval(slideNext, 3000);
+
+
+$(".hover").mouseleave(
+  function () {
+    $(this).removeClass("hover");
+  }
+);
+
+function toggleContact() {
+    const contactSection = document.getElementById('contact');
+    const contactContent = document.getElementById('contact-content');
+    const foldToggle = document.querySelector('.fold-toggle');
+
+    if (contactSection.classList.contains('folded')) {
+        contactSection.classList.remove('folded');
+        contactContent.style.display = 'block';
+        foldToggle.textContent = 'Tutup';
+    } else {
+        contactSection.classList.add('folded');
+        contactContent.style.display = 'none';
+        foldToggle.textContent = 'Hubungi Kami';
+    }
+}
+    </script>
+</body>
+</html>

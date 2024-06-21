@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Pemesanan Produk Makanan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pemesanan Produk Makanan</h1>
+        <div class="product">
+            <img src="produk1.jpg" alt="Produk 1" class="product-image" onclick="openPopup('produk1.jpg')">
+            <h2>Nama Produk 1</h2>
+            <p>Harga: Rp 50.000</p>
+            <div class="quantity-selector">
+                <button class="quantity-button" onclick="decreaseQuantity('quantity1')">-</button>
+                <input type="text" id="quantity1" value="1">
+                <button class="quantity-button" onclick="increaseQuantity('quantity1')">+</button>
+            </div>
+            <button class="add-to-order-button">Tambahkan Pesanan</button>
+        </div>
+    </div>
+
+    <div id="popup" class="popup">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <img class="popup-content" id="popup-image">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

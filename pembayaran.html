@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<title>Product Grid</title>
+<style>
+  /* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: lightcoral;
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;  /* Setting a base font size */
+    line-height: 1.6; /* Setting a line height for better readability */
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: darkred;
+    padding: 10px 20px;
+    border-bottom: 2px solid #ff4b4b;
+    margin-bottom: 20px;
+    border: 1px solid white;
+}
+/* Header Styles */
+header h1 {
+    display: inline-block; /* Ensure the box only wraps around the text */
+    padding: 10px 20px; /* Add padding to create space inside the box */
+    border: 2px solid white; /* Add a border around the text */
+    border-radius: 10px; /* Add rounded corners to the border */
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.original-box-shadow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgba(0, 0z 0z 0.8);
+  font-size: 30px;
+  width: 230px;
+  height: 50px;
+  border-radius: 15px;
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 0.4), 10px 10px 0px 0px rgba(0, 0, 0, 0.3), 15px 15px 0px 0px rgba(0, 0, 0, 0.2), 20px 20px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+}
+
+header .logo img {
+    height: 130px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+/* Product Grid Styles */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+    justify-items: center;
+    align-items: start;
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-item img {
+    width: 100%;
+    height: auto;
+}
+
+.product-item h2 {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.product-item p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+/* Quantity Container */
+.quantity-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.quantity {
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+.quantity button {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Add to Cart Button */
+.add-to-cart {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: #45a049;
+}
+
+/* Saved Address Section */
+.saved-address {
+    background-color: rgba(0, 0, 0, 0.8); /* Warna latar belakang kotak */
+    border-radius: 10px; /* Membuat sudut kotak menjadi lebih bulat */
+    padding: 20px; /* Ruang dalam kotak */
+    margin-bottom: 20px; /* Jarak antara kotak dengan elemen lain */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Efek bayangan untuk memberikan kedalaman */
+}
+
+.saved-address h3 {
+    margin-bottom: 10px; /* Jarak antara judul dengan elemen lain */
+    color: orange; /* Warna teks judul */
+}
+
+.saved-address p {
+    margin: 5px 0; /* Jarak antara paragraf dengan elemen lain */
+    color: white; /* Warna teks */
+}
+
+.saved-address p i {
+    margin-right: 5px; /* Jarak antara ikon dengan teks */
+    color: blue; /* Warna ikon */
+}
+
+
+
+.address-box h3 {
+    margin-bottom: 10px; /* Jarak antara judul dengan elemen lain */
+}
+
+.address-details p {
+    margin: 5px 0; /* Jarak antara paragraf dengan elemen lain */
+}
+
+/* Style untuk ikon Font Awesome */
+.address-details p i {
+    margin-right: 5px; /* Jarak antara ikon dengan teks */
+    color: #555; /* Warna ikon */
+}
+
+/* Cart Styles */
+.cart {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.cart:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.cart-icon {
+    font-size: 29px;
+}
+
+/* Cart Popup */
+#cartPopup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+#cartPopup .modal-content {
+    background-color: rgba(0, 0, 0, 0.6);
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    color: white;
+}
+
+#cartPopup .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#cartPopup .close:hover {
+    color: #333;
+}
+
+#cartPopup h2 {
+    margin-bottom: 10px;
+}
+
+#cartPopup ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#cartPopup li {
+    margin-bottom: 10px;
+}
+
+#cartPopup button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#cartPopup button:hover {
+    background-color: #45a049;
+}
+
+/* Order Modal */
+.modal, .address-form {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content, .address-form-content {
+    background-color: rgba(0, 0, 0, 0.8);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+    color: white;
+}
+
+.close, .close-address-form {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus, .close-address-form:hover, .close-address-form:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Address Form */
+.address-form input[type="text"],
+.address-form input[type="tel"],
+.address-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+.address-form-content {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin: 0 auto;
+    color: white;
+}
+
+.address-form-content label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+
+.address-form-content button {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.address-form-content button:hover {
+    background-color: green;
+}
+
+/* Order Summary */
+.shipping-address, .order-details, .payment-options {
+    margin-bottom: 20px;
+}
+
+.shipping-address h3, .order-details h3, .payment-options h3 {
+    margin-bottom: 10px;
+}
+
+.shipping-address p, .order-details p {
+    margin: 5px 0;
+}
+
+.payment-options ul {
+    list-style: none;
+    padding: 0;
+}
+
+.payment-options li {
+    margin-bottom: 10px;
+}
+
+/* Proceed to Payment Button */
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button1 {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Order Button */
+.order-button {
+    position: fixed;
+    height: 70px;
+    right: 20px;
+    justify-content: center;
+    cursor: pointer;
+    bottom: 110px;
+}
+
+.order-button img {
+    height: 120px;
+}
+.swal2-popup {
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+</style>
+</head>
+<header>
+    <h1 class="original-box-shadow" class="header1"><i class="fas fa-shopping-basket"></i> Pilih pesanan</h1>
+
+  <div class="logo">
+        <img src="img/logo.webp" alt="Logo">
+    </div>
+</header>
+<body>
+
+
+    <div class="product-grid">
+        <div class="product-item" id="product1">
+            <img src="img/6.webp" alt="Product 1" class="product-image">
+            <h2>Fire Chicken</h2>
+            <p>Price: 14.000</p>
+            <div class="quantity-container">
+                <button onclick="decreaseQuantity('product1')">-</button>
+                <span class="quantity" id="quantity-product1">0</span>
+                <button onclick="increaseQuantity('product1')">+</button>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('product1', 'Fire Chicken', 14000)">   <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+        </div>
+        <div class="product-item" id="fire1">
+            <img src="img/12.webp" alt="Fire Chicken" class="product-image">
+            <h2>Fire Wings</h2>
+            <p>Price: 25.000</p>
+            <div class="quantity-container">
+                <button onclick="decreaseQuantity('fire1')">-</button>
+                <span class="quantity" id="quantity-fire1">0</span>
+                <button onclick="increaseQuantity('fire1')">+</button>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('fire1', 'Fire Wings', 25000)">   <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+        </div>
+        <div class="product-item" id="fire4">
+            <img src="img/13.webp" alt="Fire Chicken" class="product-image">
+            <h2>4x Fire Chicken</h2>
+            <p>Price: 41.000</p>
+            <div class="quantity-container">
+                <button onclick="decreaseQuantity('fire4')">-</button>
+                <span class="quantity" id="quantity-fire4">0</span>
+                <button onclick="increaseQuantity('fire4')">+</button>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('fire4', 'Fire Chicken', 41000)">   <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+        </div>
+                <div class="product-item" id="cola4">
+            <img src="img/1.webp" alt="Chicken Cola" class="product-image">
+            <h2>Chicken Cola</h2>
+            <p>Price: 30.000</p>
+            <div class="quantity-container">
+                <button onclick="decreaseQuantity('cola4')">-</button>
+                <span class="quantity" id="quantity-cola4">0</span>
+                <button onclick="increaseQuantity('cola4')">+</button>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('cola4', 'Chicken Cola', 30000)">   <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+        </div>
+                <div class="product-item" id="gochu1">
+            <img src="img/2.webp" alt="Chicken Gochujang" class="product-image">
+            <h2>Chicken Gochujang</h2>
+            <p>Price: 35.000</p>
+            <div class="quantity-container">
+                <button onclick="decreaseQuantity('gochu1')">-</button>
+                <span class="quantity" id="quantity-gochu1">0</span>
+                <button onclick="increaseQuantity('gochu1')">+</button>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('gochu1', 'Chicken Gochujang', 35000)">   <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+        </div>
+                <div class="product-item" id="prex1">
+            <img src="img/3.webp" alt="Ayam Geprex" class="product-image">
+            <h2>Ayam Geprex</h2>
+            <p>Price: 13.000</p>
+            <div class="quantity-container">
+                <button onclick="decreaseQuantity('prex1')">-</button>
+                <span class="quantity" id="quantity-prex1">0</span>
+                <button onclick="increaseQuantity('prex1')">+</button>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('prex1', 'Ayam Geprex', 13000)">   <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+        </div>
+                <div class="product-item" id="ori1">
+            <img src="img/5.webp" alt="Original Chicken" class="product-image">
+            <h2>Original Chicken</h2>
+            <p>Price: 9.000</p>
+            <div class="quantity-container">
+                <button onclick="decreaseQuantity('ori1')">-</button>
+                <span class="quantity" id="quantity-ori1">0</span>
+                <button onclick="increaseQuantity('ori1')">+</button>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('ori1', 'Original Chicken', 9000)">   <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+        </div>
+                        <div class="product-item" id="promo4">
+            <img src="img/15.webp" alt="Promo4" class="product-image">
+            <p><b>Promo 4</p></b>
+            <p>Price: 25.000 </p>
+            <div class="quantity-container">
+                <button onclick="decreaseQuantity('promo4')">-</button>
+                <span class="quantity" id="quantity-promo4">0</span>
+                <button onclick="increaseQuantity('promo4')">+</button>
+            </div>
+            <button class="add-to-cart" onclick="addToCart('promo4', 'Promo 4', 25000)">   <i class="fas fa-shopping-cart"></i> Tambah ke Keranjang</button>
+        </div>
+        <!-- Add more products here -->
+    </div>
+    <div class="saved-address">
+<button1 onclick="openAddressForm()">
+    <i class="fas fa-map-marker-alt"></i> &nbsp; Isi Alamat Pengiriman
+</button1>
+<img src="img/cart.webp" class="order-button" onclick="openCartPopup()">
+
+
+    <!-- Div to Display Saved Address -->
+    <div id="savedAddress" class="saved-address"></div>
+    
+    </div>
+<!-- Modal for Order Summary -->
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2><i class="fas fa-receipt"></i> Order Summary</h2>
+        <div id="shippingAddressDetails" class="shipping-address"></div>
+        <div id="orderDetails" class="order-details"></div>
+        <div class="payment-options">
+            <h3>Payment Options</h3>
+            <ul>
+                <li><input type="radio" id="ovo" name="payment" value="ovo"><label for="ovo">OVO</label></li>
+                <li><input type="radio" id="dana" name="payment" value="dana"><label for="dana">DANA</label></li>
+                <li><input type="radio" id="bri-transfer" name="payment" value="bri-transfer"><label for="bri-transfer">BRI Transfer</label></li>
+                <li><input type="radio" id="cod" name="payment" value="cod"><label for="cod">Cash on Delivery (COD)</label></li>
+            </ul>
+        </div>
+        <button1 onclick="processPayment()">Proceed to Payment</button>
+    </div>
+</div>
+    <!-- Address Form -->
+    <div id="addressForm" class="address-form">
+        <div class="address-form-content">
+            <span class="close-address-form" onclick="closeAddressForm()">&times;</span>
+<h2><i class="fas fa-map-marked-alt"></i> Alamat Pengiriman</h2>
+<form id="addressFormContent">
+    <label for="name"><i class="fas fa-user"></i> &nbsp; Nama:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="address"><i class="fas fa-map-marker-alt"></i> &nbsp; Alamat:</label>
+    <textarea id="address" name="address" required></textarea>
+    <label for="city"><i class="fas fa-city"></i> &nbsp; Kabupaten:</label>
+    <input type="text" id="city" name="city" required>
+    <label for="landmark"><i class="fas fa-landmark"></i> &nbsp; Detail Patokan Alamat:</label>
+    <input type="text" id="landmark" name="landmark" required>
+<label for="phone"><i class="fas fa-phone"></i> &nbsp; Nomor HP Pemesan:</label>    <input type="tel" id="phone" name="phone" required>
+    <button1 type="button" onclick="saveAddress()"><i class="fas fa-save"></i> Simpan Alamat</button>
+</form>
+            
+        </div>
+    </div>
+
+<!-- Pop-up Detail Pesanan -->
+<div id="cartPopup" class="modal">
+  <ul id="cart"></ul>
+
+    <div class="modal-content">
+        <span class="close" onclick="closeCartPopup()">&times;</span>
+        <h2>Detail Pesanan</h2>
+        <ul id="cartItems"></ul>
+        <p id="totalPrice"></p>
+        <button1 onclick="checkout()">Checkout</button>
+</div>
+</div>
+        <!-- Div to Display Saved Address -->
+<div id="savedAddress">
+    <div class="address-box">
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // JavaScript functions
+
+        let cart = {};
+
+function increaseQuantity(productId) {
+    const quantityElement = document.getElementById(`quantity-${productId}`);
+    let quantity = parseInt(quantityElement.textContent, 10);
+    quantity++;
+    quantityElement.textContent = quantity;
+}
+
+function decreaseQuantity(productId) {
+    const quantityElement = document.getElementById(`quantity-${productId}`);
+    let quantity = parseInt(quantityElement.textContent, 10);
+    if (quantity > 0) {
+        quantity--;
+        quantityElement.textContent = quantity;
+    }
+}
+
+function addToCart(productId, productName, price) {
+    const quantityElement = document.getElementById(`quantity-${productId}`);
+    let quantity = parseInt(quantityElement.textContent, 10);
+    if (quantity > 0) {
+        if (!cart[productId]) {
+            cart[productId] = { productName, price, quantity };
+        } else {
+            cart[productId].quantity += quantity;
+        }
+        renderCart();
+        document.getElementById("cart").style.display = "none";
+        quantityElement.textContent = 0;  // Reset quantity after adding to cart
+        Swal.fire({
+            title: "Success!",
+            text: "Product added successfully!",
+            icon: "success",
+            confirmButtonText: "OK"
+        });
+    }
+}
+function renderCart() {
+    const cartElement = document.getElementById('cart');
+    cartElement.innerHTML = '';
+    for (const productId in cart) {
+        const cartItem = cart[productId];
+        const listItem = document.createElement('li');
+        listItem.textContent = `${cartItem.productName} - Quantity: ${cartItem.quantity} - Total: ${(cartItem.price * cartItem.quantity).toLocaleString()}`;
+        cartElement.appendChild(listItem);
+    }
+}
+
+        function openAddressForm() {
+            document.getElementById('addressForm').style.display = 'block';
+        }
+
+        function closeAddressForm() {
+            document.getElementById('addressForm').style.display = 'none';
+        }
+
+        function saveAddress() {
+            const form = document.getElementById('addressFormContent');
+            if (form.checkValidity()) {
+                const addressDetails = {
+                    name: form.name.value,
+                    address: form.address.value,
+                    city: form.city.value,
+                    landmark: form.landmark.value,
+                    phone: form.phone.value
+                };
+                localStorage.setItem('addressDetails', JSON.stringify(addressDetails));
+                closeAddressForm();
+   Swal.fire({
+  position: "center",
+  icon: "success",
+  title: "Your address has been saved",
+  showConfirmButton: false,
+  timer: 1500
+});
+                displaySavedAddress();
+            } else {
+                alert('Mohon isi semua field yang diperlukan.');
+            }
+        }
+
+        function displaySavedAddress() {
+            const addressDetails = JSON.parse(localStorage.getItem('addressDetails'));
+            if (addressDetails) {
+                document.getElementById('savedAddress').innerHTML = `
+<h3><i class="fas fa-map-marker-alt"></i> &nbsp; Alamat Pengiriman Tersimpan</h3>
+<p><i class="fas fa-user"></i>&nbsp; Nama: &nbsp; ${addressDetails.name}</p>
+<p><i class="fas fa-map"></i>&nbsp; Alamat: &nbsp; ${addressDetails.address}</p>
+<p><i class="fas fa-city"></i> &nbsp; Kabupaten: &nbsp; ${addressDetails.city}</p>
+<p><i class="fas fa-landmark"></i> &nbsp; Detail Patokan Alamat: ${addressDetails.landmark}</p>
+<p><i class="fas fa-phone"></i> &nbsp; Nomor HP: ${addressDetails.phone}</p>
+                `;
+            }
+        }
+
+        function checkout() {
+    if (Object.keys(cart).length === 0) {
+        alert('Keranjang belanja Anda kosong.');
+        return;
+    }
+    const addressDetails = JSON.parse(localStorage.getItem('addressDetails'));
+    if (!addressDetails) {
+        alert('Mohon isi alamat pengiriman terlebih dahulu.');
+        openAddressForm();
+        return;
+    }
+    document.getElementById('orderModal').style.display = 'block';
+    document.getElementById('shippingAddressDetails').innerHTML = `
+        <h3><i class="fas fa-shipping-fast"></i> &nbsp; Alamat Pengiriman</h3>
+        <p><i class="fas fa-user"></i> &nbsp; Nama: &nbsp; ${addressDetails.name}</p>
+        <p><i class="fas fa-map-marker-alt"></i>&nbsp; Alamat: &nbsp; ${addressDetails.address}</p>
+        <p><i class="fas fa-city"></i>&nbsp; Kabupaten: &nbsp; ${addressDetails.city}</p>
+        <p><i class="fas fa-landmark"></i> &nbsp; Detail Patokan Alamat: ${addressDetails.landmark}</p>
+        <p><i class="fas fa-phone"></i> &nbsp; Nomor HP: ${addressDetails.phone}</p>
+    `;
+    closeCartPopup ();
+    
+    let orderDetailsHTML = '<h3>Order Details</h3>';
+    let totalOrderPrice = 0;
+    for (const productId in cart) {
+        const cartItem = cart[productId];
+        const itemTotal = cartItem.price * cartItem.quantity;
+        totalOrderPrice += itemTotal;
+        orderDetailsHTML += `
+            <p>${cartItem.productName} - Quantity: ${cartItem.quantity} - Total: ${itemTotal.toLocaleString()}</p>
+        `;
+    }
+    orderDetailsHTML += `<h3><i class="fas fa-dollar-sign"></i> Total Order Price</h3>
+    <p><i class="fas fa-money-bill-wave"></i> Total: ${totalOrderPrice.toLocaleString()}</p>`;
+    document.getElementById('orderDetails').innerHTML = orderDetailsHTML;
+    openModal();
+}
+// Fungsi untuk menutup ringkasan pesanan
+function closeOrderSummary() {
+  var modal = document.getElementById("orderSummary");
+  modal.style.display = none;
+}
+
+
+        function processPayment() {
+    const selectedPayment = document.querySelector('input[name=payment]:checked');
+    if (!selectedPayment) {
+        alert('Mohon pilih metode pembayaran.');
+        return;
+    }
+
+    const addressDetails = JSON.parse(localStorage.getItem('addressDetails'));
+    const totalOrderPrice = calculateTotalOrderPrice();
+    const paymentMethod = selectedPayment.value;
+
+    // Get order details
+    const orderDetails = getOrderDetails();
+
+    const paymentData = {
+        addressDetails: addressDetails,
+        orderDetails: orderDetails,
+        totalOrderPrice: totalOrderPrice,
+        paymentMethod: paymentMethod
+    };
+    Swal.fire({
+    title: "Are you sure?",
+    text: "Mohon diperiksa kembali sebelum ke halaman pembayaran!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Gassss!"
+}).then((result) => {
+    if (result.isConfirmed) {
+        Swal.fire({
+            title: "Tunggu!",
+            text: "Di tunggu Pembayarannya.",
+            icon: "success"
+        });
+        window.location.href = 'payment.html?' + queryString;
+    }
+});
+
+    // Encode payment data as URL parameters
+    const queryString = Object.keys(paymentData).map(key => key + '=' + encodeURIComponent(JSON.stringify(paymentData[key]))).join('&');
+
+    // Redirect to the new page with payment data as parameters
+    
+}
+
+function getOrderDetails() {
+    const orderDetails = {};
+    for (const productId in cart) {
+        const cartItem = cart[productId];
+        orderDetails[productId] = {
+            productName: cartItem.productName,
+            quantity: cartItem.quantity,
+            price: cartItem.price
+        };
+    }
+    return orderDetails;
+}
+
+function calculateTotalOrderPrice() {
+    let totalOrderPrice = 0;
+    for (const productId in cart) {
+        const cartItem = cart[productId];
+        const itemTotal = cartItem.price * cartItem.quantity;
+        totalOrderPrice += itemTotal;
+    }
+    return totalOrderPrice;
+}
+// Fungsi untuk menampilkan modal ringkasan pesanan
+function openModal() {
+    document.getElementById('orderModal').style.display = 'block';
+}
+
+// Fungsi untuk menutup modal ringkasan pesanan
+function closeModal() {
+    document.getElementById('orderModal').style.display = 'none';
+}
+// Fungsi untuk menampilkan atau menyembunyikan keranjang belanja
+function toggleCart() {
+    var cart = document.getElementById("cart");
+    cart.style.display = cart.style.display === "none" ? "block" : "none";
+}
+// Fungsi untuk membuka pop-up detail pesanan
+function openCartPopup() {
+    var popup = document.getElementById("cartPopup");
+    popup.style.display = "block";
+    renderCartItems(); // Render cart items when opening the popup
+}
+
+// Fungsi untuk menutup pop-up detail pesanan
+function closeCartPopup() {
+    var popup = document.getElementById("cartPopup");
+    popup.style.display = "none";
+}
+
+// Fungsi untuk menampilkan detail pesanan dalam pop-up
+function renderCartItems() {
+    var cartItems = document.getElementById("cartItems");
+    cartItems.innerHTML = "";
+    
+    var totalPrice = 0;
+    for (var productId in cart) {
+        var cartItem = cart[productId];
+        var listItem = document.createElement("li");
+        listItem.textContent = cartItem.productName + " - Quantity: " + cartItem.quantity + " - Total: " + (cartItem.price * cartItem.quantity).toLocaleString();
+        cartItems.appendChild(listItem);
+        
+        totalPrice += cartItem.price * cartItem.quantity;
+    }
+    
+    // Tampilkan total harga pesanan
+    var totalPriceElement = document.getElementById("totalPrice");
+    totalPriceElement.textContent = "Total Price: " + totalPrice.toLocaleString();
+}
+// Tambahkan event listener pada ikon keranjang
+document.getElementById("cartIcon").addEventListener("click", openCartPopup);
+    </script>
+</body>
+</html>
